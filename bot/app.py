@@ -39,7 +39,7 @@ async def on_ready():
 
     #liks
     invite = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
-    print('\nUse this link to invite {}:'.format(client.user.name)
+    print('\nUse this link to invite {}:'.format(client.user.name))
     print(invite)
 
     github_repo = 'github.com/PabloCorbCon/Taur'

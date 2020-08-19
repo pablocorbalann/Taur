@@ -132,4 +132,4 @@ dmypy.json
 .idea/
 
 # add the tokens file to the .gitignore
-bot/token.txt
+bot/doc/token.txt
