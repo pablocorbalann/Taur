@@ -10,10 +10,11 @@ import json
 colorama.init(autoreset=True)
 
 # we create the discord client.
-client = ()
 with open('doc/description.txt') as description:
 
-    client = discord.Client(description=description.read())
+    d = description.read()
+
+client = discord.Client(description=d)
 
 @client.event
 async def on_ready():
@@ -46,10 +47,4 @@ async def on_ready():
     print('\nGitHub repository: {}'.format(github_repo))
 
 
-
-if __name__ == '__main__':
-
-    with open('doc/token.txt', 'r') as token:
-
-        # run the client with a token.
-        client.run(token.read())
+client.run()
