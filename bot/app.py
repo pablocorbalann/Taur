@@ -7,6 +7,9 @@ from discord.ext import commands
 import colorama
 import platform
 
+
+import load
+
 colorama.init(autoreset=True)
 
 TOKEN = ''
@@ -51,15 +54,6 @@ async def info(ctx):
     This function will display information about the bot using the
     t/info ccommand, to display an embed message.
     """
-    # description of the message
-    d = '''
-Taur is a Discord bot written with the discord.py library that implements a large number of commands,
-although it is still in the early stages of development.
-Every week we add at least three new commands to Taur, which are previously tested.
-
-Maybe you need the command **t/commands**, to display the bot commands.
-    '''
-
     # create the discord embed message
     info_embed = discord.Embed(title="Information",
         description=d,
@@ -84,6 +78,27 @@ Maybe you need the command **t/commands**, to display the bot commands.
 @bot.command():
 async def commands(ctx):
 
-    pass
+    """
+    This function will display information about the bot using the
+    t/commands ccommand, to display an embed message and it uses other functions
+    as load_help_commadns() located in commands.py to load all the data.
+    """
+
+    # get the bot commands as a Python dic
+    bot_commands = load.load_help_commands('doc/commands.json')['commands']
+
+    # create the embed message
+    d = ''
+
+    for command, command_key in zip(bot_commands, bot_commands.keys()):
+
+        d += 't/{}: {}\n'.format(command_key, command)
+
+    commands_embed=discord.Embed(title="Taur | Commands",
+        description='\n{}\n'.format(d),
+        color=0x087d1b)
+    commands_embed.set_author(name="Taur",
+        url="https://github.com/PabloCorbCon/Taur")
+    commands_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
 
 bot.run(TOKEN)

@@ -1,0 +1,8 @@
+{
+	"commands": [
+		{
+			"info":"Displays information about @Taur",
+			"commands":"Shows the commands of the bot",			
+		}
+	]
+}
