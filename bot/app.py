@@ -10,7 +10,7 @@ import json
 
 colorama.init(autoreset=True)
 
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.kQQS0wNEQmUOpmf0QlMSxG7pzDo'
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.cXYIAvAIX6zskgRwkOzeU_FwYfQ'
 
 bot = commands.Bot(command_prefix='t/')
 
@@ -45,8 +45,8 @@ async def on_ready():
     print('\nGitHub repository: {}'.format(github_repo))
 
 
-@bot.command
-async def info():
+@bot.command()
+async def info(ctx):
 
     """
     This function will display information about the bot using the
@@ -66,19 +66,17 @@ Maybe you need the command **t/commands**, to display the bot commands.
         description=d,
         color=0x0a8f3f)
 
-    with open('doc/description.txt', 'r') as f:
-
-        info_description = f.read()
-
     # create the embed message
     info_embed=discord.Embed(title="Taur | Information",
-        description=info_description,
+        description=open('doc/description.txt').read(),
         color=0x087d1b)
     info_embed.set_author(name="Taur",
         url="https://github.com/PabloCorbCon/Taur")
-    info_embed.set_image('https://github.com/PabloCorbCon/Taur/blob/master/branding/logo.png')
+    info_embed.set_image(url='https://github.com/PabloCorbCon/Taur/blob/master/branding/logo.png?raw=true')
     info_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+
+    print('\nTaur has responded to a command (t/info) in {}'.format(ctx))
     
-    await bot.say(embed=info_embed)
+    await ctx.send(embed=info_embed)
 
 bot.run(TOKEN)
