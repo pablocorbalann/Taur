@@ -84,7 +84,7 @@ async def info(ctx):
 
 
 
-@bot.command():
+@bot.command()
 async def commands(ctx):
 
     """
@@ -107,5 +107,17 @@ async def commands(ctx):
     print('\nTaur has responded to a command (t/commands) in {}'.format(ctx))
 
     await ctx.send(embed=commands_embed)
+
+
+
+
+@bot.command()
+async def invite(ctx):
+
+    """
+    This function will provide a link to invite Taur
+    to your own discord server. This link is not provided using
+    an embed message
+    """
 
 bot.run(TOKEN)
