@@ -6,11 +6,10 @@ import discord
 from discord.ext import commands
 import colorama
 import platform
-import json
 
 colorama.init(autoreset=True)
 
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.cXYIAvAIX6zskgRwkOzeU_FwYfQ'
+TOKEN = ''
 
 bot = commands.Bot(command_prefix='t/')
 
@@ -78,5 +77,13 @@ Maybe you need the command **t/commands**, to display the bot commands.
     print('\nTaur has responded to a command (t/info) in {}'.format(ctx))
     
     await ctx.send(embed=info_embed)
+
+
+
+
+@bot.command():
+async def commands(ctx):
+
+    pass
 
 bot.run(TOKEN)
