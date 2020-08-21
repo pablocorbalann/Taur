@@ -1,3 +1,9 @@
+# TAUR
+# By Pablo Corbalán
+# Twitter: @pablocorbcon
+# GitHub: @PabloCorbCon
+
+
 # This is the main file of Taur. Our Discord bot written in discord.py
 # if you need more information about Taur, you can check the GitHub repository
 # https://github.com/PabloCorCon/Taur
@@ -12,8 +18,10 @@ import load
 
 colorama.init(autoreset=True)
 
+# set the token (const token)
 TOKEN = ''
 
+# create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
 @bot.event
@@ -21,7 +29,8 @@ async def on_ready():
 
     """
     This function will start once the bot is ready, using the client.event decorator
-    and the on_ready() function.
+    and the on_ready() function. 
+    It will display information about the bot itself, the server and the programmer
     """
     print(colorama.Fore.LIGHTYELLOW_EX + '· · · · · · · · · TAUR · · · · · · · · ·')
     print('\nBy Pablo Corbalán.')
@@ -88,17 +97,15 @@ async def commands(ctx):
     bot_commands = load.load_help_commands('doc/commands.json')['commands']
 
     # create the embed message
-    d = ''
-
-    for command, command_key in zip(bot_commands, bot_commands.keys()):
-
-        d += 't/{}: {}\n'.format(command_key, command)
-
     commands_embed=discord.Embed(title="Taur | Commands",
-        description='\n{}\n'.format(d),
+        description=load.load_help_commands('doc/commands.json', True),
         color=0x087d1b)
     commands_embed.set_author(name="Taur",
         url="https://github.com/PabloCorbCon/Taur")
     commands_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+
+    print('\nTaur has responded to a command (t/commands) in {}'.format(ctx))
+
+    await ctx.send(embed=commands_embed)
 
 bot.run(TOKEN)
