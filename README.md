@@ -1,6 +1,5 @@
 
-![Taur Logo](https://raw.githubusercontent.com/PabloCorbCon/Taur/master/branding/logo.png "Taur Logo")
-
+<img src="https://raw.githubusercontent.com/PabloCorbCon/Taur/master/branding/logo.png" align="center">
 <h1 align="center">TAUR</h1>
 
 ---
