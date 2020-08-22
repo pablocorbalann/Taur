@@ -19,7 +19,7 @@ import load
 colorama.init(autoreset=True)
 
 # set the token (const token)
-TOKEN = ''
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.dKv3RL7_lKKDvgBZG1vlyF_sGsE'
 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
@@ -77,8 +77,7 @@ async def info(ctx):
     info_embed.set_image(url='https://github.com/PabloCorbCon/Taur/blob/master/branding/logo.png?raw=true')
     info_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
 
-    print('\nTaur has responded to a command (t/info) in {}'.format(ctx))
-    
+    print('Taur has responded to a command (t/info) in {}'.format(ctx))
     await ctx.send(embed=info_embed)
 
 
@@ -104,8 +103,7 @@ async def commands(ctx):
         url="https://github.com/PabloCorbCon/Taur")
     commands_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
 
-    print('\nTaur has responded to a command (t/commands) in {}'.format(ctx))
-
+    print('Taur has responded to a command (t/commands) in {}'.format(ctx))
     await ctx.send(embed=commands_embed)
 
 
@@ -119,5 +117,12 @@ async def invite(ctx):
     to your own discord server. This link is not provided using
     an embed message
     """
+
+    #create the bot link
+    bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
+
+    print('Taur has responded to a command (t/commands) in {}'.format(ctx))
+    await ctx.send("You can invite @Taur using **[this link]**({}) :point_left:".format(bot_invite_link))
+
 
 bot.run(TOKEN)
