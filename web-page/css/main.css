@@ -5,7 +5,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    border-top: 6px #AD91FF solid !important;
+    border-top: 6px #0DA041 solid !important;
     font-size: 16px;
 }
 
@@ -17,16 +17,16 @@ body {
  }
  .nav-link:hover {
      background: transparent !important;
-     color: #AD91FF !important;
+     color: #0DA041 !important;
      font-weight: bold !important;
  }
 
  .login-btn {
-     border: 2px solid #AD91FF !important;
+     border: 2px solid #0DA041 !important;
      font-size: 10px !important;
  }
  .login-btn:hover {
-     background: #AD91FF !important;
+     background: #0DA041 !important;
  }
 .navbar {
     box-shadow: none !important
@@ -48,15 +48,23 @@ body {
 }
 
 .btn-primary {
-    background-color: #AD91FF!important
+    background-color: #0DA041 !important;
 }
+
+.btn-primary:hover {
+    background-color: #F9F9F9 !important;
+    color: #0DA041 !important;
+}
+
 .btn-secondary {
-    background-color: #2C2F33 !important
+    background-color:#32323C !important;
+    color: #0DA041 !important;
 }
+
 .heading {
     padding: 160px 50px !important;
     color: #fff !important;
-    background-image: url("../assets/wavy-purple-by-nouridio.svg") !important;
+    background-image: url("../assets/wave.svg") !important;
     background-position: bottom !important;
     background-size: 300% !important;
     background-repeat: no-repeat !important;
@@ -65,7 +73,8 @@ body {
 .title {
     line-height: 90px !important;
     margin-bottom: -2px !important;
-    font-size: 36px !important
+    font-size: 8em !important;
+    padding-bottom: 0.7em;
 }
 
 .subtitle {
@@ -77,7 +86,7 @@ body {
 
 .features {
     text-align: center !important;
-    background: #AD91FF !important;
+    background: #0DA041 !important;
     padding: 60px 50px !important;
     background-image: url("../assets/wavy-dark-by-nouridio.svg") !important;
     background-position: bottom !important;
@@ -109,6 +118,10 @@ body {
 .card {
     border-radius: 5px !important;
     box-shadow: none !important;
+    padding-left: 0.3em !important;
+    padding-right: 0.3em !important;
+    margin-left: 0.2em !important;
+    margin-right: 0.2em !important;
 }
 
 .card-title {
@@ -119,7 +132,7 @@ body {
 
 .statistics {
     text-align: center !important;
-    padding-top: 300px !important;
+    padding-top: 30px !important;
 }
 
 .statistics .card-body{
@@ -133,7 +146,7 @@ body {
 .statistics .title {
     font-size: 40px !important;
     color: #ffffff !important;
-    line-height: 70px !important;
+    line-height: 70px !important
 }
 
 .statistics .subtitle {
@@ -144,9 +157,14 @@ body {
 .card.statistic {
     background: transparent !important;
     box-shadow: none !important;
-    color: #f7f7f7 !important;
+    color: #F9F9F9 !important;
 }
 
+
+.discord-ilustration {
+    padding-top: -30px;
+    padding-bottom: 0.5em;
+}
 
 .page_end {
     background-image: url("../assets/wavy-light-by-nouridio.svg") !important;
@@ -186,22 +204,7 @@ color: rgba(255, 255, 255, 0.46) !important
     padding: 30px 30px !important
 }
 
-.footer .nouridio {
-    font-family: 'Montserrat' !important;
-    font-style: normal !important;
-    font-weight: 600 !important;
-    font-size: 16px !important;
-    line-height: 5px !important;
-    letter-spacing: 0.15em !important;
-    font-variant: small-caps !important;
-}
-
-.footer .nouridio a {
-    color: #AD91FF !important;
-    text-decoration: none !important;
-}
-
-.footer .bot-footer {
-    text-align: center !important;
-    color: #a2a8bd !important
+.footer .green-link-name {
+    font-family: "Poppins";
+    color: #0DA041;
 }
