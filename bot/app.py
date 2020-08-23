@@ -122,7 +122,7 @@ async def invite(ctx):
     bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
 
     print('Taur has responded to a command (t/commands) in {}'.format(ctx))
-    await ctx.send("You can invite @Taur using **[this link]**({}) :point_left:".format(bot_invite_link))
+    await ctx.send("You can invite @Taur using **[this]**({}) link.".format(bot_invite_link))
 
 
 bot.run(TOKEN)
