@@ -48,3 +48,19 @@ body {
     font-weight: 600 !important;
     text-transform: uppercase !important;
 }
+
+.license-text {
+	margin-top: 0.3em !important;
+	margin-right: 0.2em !important;
+	margin-left: 0.2em !important;
+	margin-bottom: 0.3em !important;
+}
+
+.title {
+    line-height: 90px !important;
+    margin-bottom: -2px !important;
+    font-size: 8em !important;
+    padding-bottom: 0.7em;
+    font-size: 4em;
+    color: #F9F9F9;
+}
