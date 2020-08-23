@@ -68,6 +68,7 @@ body {
     background-position: bottom !important;
     background-size: 300% !important;
     background-repeat: no-repeat !important;
+    margin-bottom: -10px
 }
 
 .title {
@@ -113,6 +114,7 @@ body {
 }
 .cards {
     margin-top: 30px !important;
+    border-bottom: none !important;
 }
 
 .card {
@@ -127,12 +129,13 @@ body {
 .card-title {
     font-size: 28px !important;
     font-weight: 600 !important;
-    color: #AD91FF !important;
+    color: #0DA041 !important;
 }
 
 .statistics {
     text-align: center !important;
     padding-top: 30px !important;
+    border-bottom: none !important;
 }
 
 .statistics .card-body{
@@ -184,7 +187,7 @@ body {
 .features .card {
     background: #1D1E28;
     border-radius: 22px !important;
-    border: 4px solid #AD91FF;
+    border: 4px solid #0DA041;
 }
 .features .card-text {
 color: rgba(255, 255, 255, 0.46) !important
@@ -204,7 +207,13 @@ color: rgba(255, 255, 255, 0.46) !important
     padding: 30px 30px !important
 }
 
-.footer .green-link-name {
+.green-link-name {
+    font-family: "Poppins";
+    color: #0DA041;
+}
+
+.green-link-name:hover {
+    transform: scale(1.05);
     font-family: "Poppins";
     color: #0DA041;
 }
