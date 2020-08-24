@@ -20,7 +20,6 @@ body {
      color: #0DA041 !important;
      font-weight: bold !important;
 }
-
 .login-btn {
      border: 2px solid #0DA041 !important;
      font-size: 10px !important;
@@ -52,7 +51,7 @@ body {
 .heading {
     padding: 160px 50px !important;
     color: #fff !important;
-    margin-bottom: -10px
+    margin-bottom: -40px
 }
 
 .title {
@@ -70,15 +69,6 @@ body {
 	padding-right: 0.5em !important;
 	padding-bottom: 0.2em;
 	margin-bottom: -30px;
-}
-
-.under-apache-text {
-	font-size: 0.75em;
-	color: rgba(255, 255, 255, 0.4);
-	padding-left: 5em !important;
-	padding-right: 5em !important;
-	padding-bottom: 0.4em;
-	margin-bottom: 0.4em;
 }
 
 .license-strong-text {
