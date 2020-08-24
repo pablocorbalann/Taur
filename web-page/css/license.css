@@ -49,18 +49,65 @@ body {
     text-transform: uppercase !important;
 }
 
-.license-text {
-	margin-top: 0.3em !important;
-	margin-right: 0.2em !important;
-	margin-left: 0.2em !important;
-	margin-bottom: 0.3em !important;
+.heading {
+    padding: 160px 50px !important;
+    color: #fff !important;
+    margin-bottom: -10px
 }
 
 .title {
     line-height: 90px !important;
     margin-bottom: -2px !important;
-    font-size: 8em !important;
-    padding-bottom: 0.7em;
-    font-size: 4em;
-    color: #F9F9F9;
+    font-size: 5em !important;
+    padding-bottom: 0.4em;
+    padding-left: 0.1em;
+}
+
+.text {
+	font-size: 1em;
+	color: rgba(255, 255, 255, 0.5);
+	padding-left: 0.5em !important;
+	padding-right: 0.5em !important;
+	padding-bottom: 0.2em;
+	margin-bottom: -30px;
+}
+
+.under-apache-text {
+	font-size: 0.75em;
+	color: rgba(255, 255, 255, 0.4);
+	padding-left: 5em !important;
+	padding-right: 5em !important;
+	padding-bottom: 0.4em;
+	margin-bottom: 0.4em;
+}
+
+.license-strong-text {
+	color: #0DA041 !important;
+	text-decoration: none !important;
+	font-weight: 800 !important;
+}
+
+.page_end {
+    background-image: url("../assets/wavy-light-by-nouridio.svg") !important;
+    background-position: bottom !important;
+    background-size: 200% !important;
+    background-repeat: no-repeat !important;
+}
+
+.footer {
+    text-align: center !important;
+    padding: 5px 6px !important;
+    color: #ecf2ff;
+    padding: 30px 30px !important
+}
+
+.green-link-name {
+    font-family: "Poppins" !important;
+    color: #0DA041 !important;
+}
+
+.green-link-name:hover {
+    transform: scale(1.05) !important;
+    color: #0DA041 !important;
+    text-decoration: none !important;
 }

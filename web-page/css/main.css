@@ -213,7 +213,7 @@ color: rgba(255, 255, 255, 0.46) !important
 }
 
 .green-link-name:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     font-family: "Poppins";
     color: #0DA041;
 }
