@@ -1,9 +1,9 @@
 {
 	"commands": [
 		{
-			"info":"Displays information about @Taur",
+			"info":"Displays information about Taur",
 			"commands":"Shows the commands of the bot",	
-			"invite":"Provides a link to invite Taur to a server",		
+			"invite":"Provides a link to invite Taur to a server"
 		}
 	]
 }

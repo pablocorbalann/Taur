@@ -25,21 +25,26 @@ def load_help_commands(route, string=False):
 
 		# create the help commands variable
 		help_commands = None
-	
+		print(help_commands)
+
 		with open(route) as f:
+
+			help_commands = json.loads(f.read())['commands'][0]
+			print('\nHELP COMMANDS: ', help_commands)
 
 			if not string:
 
 				# return the diccionary (p:string == False)
-				help_commands = json.loads(route)['commands']
 				return help_commands
 
 		# return the string (p:string == True)
-		st = None
+		st = ''
 		for command_key, command in zip(help_commands.keys(), help_commands.values()):
 
+			print(command_key, command)
+
 			# syntax of the string
-			st += '\n{}: {}'.format(command_key, command)
+			st = st + '\n{}: {}'.format(command_key, command)
 
 		return st
 
