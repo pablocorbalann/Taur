@@ -135,6 +135,33 @@ async def ping(ctx):
 
 
 
+@bot.command()
+async def members(ctx):
+
+    """
+    This function will get a list with all the users inside the
+    server and then add them to an embed message
+    """
+
+    # get the list of members
+    list_of_members = ''
+    for member in message.guild.members:
+        list_of_members += '{0} |'.format(member)
+
+    # create the embed message
+    members_embed=discord.Embed(title="Taur | Members",
+        description='Members of the server:\n{}'.format(list_of_members),
+        color=0x087d1b)
+    members_embed.set_author(name="Taur",
+        url="https://github.com/PabloCorbCon/Taur")
+    members_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+
+    # send the message
+    await ctx.send(embed=members_embed)
+
+
+
+
 #kick command using discord.py
 @bot.command()
 @commands.has_permissions(kick_members=True)
