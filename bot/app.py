@@ -13,6 +13,7 @@ from discord.ext import commands
 import colorama
 import platform
 import csv
+import random 
 
 import load
 import decorators
@@ -61,6 +62,7 @@ async def on_ready():
     print(yellow + '\nGitHub repository: {}'.format(github_repo))
 
 
+
 @bot.event
 async def on_message(message):
 
@@ -86,6 +88,22 @@ async def on_message(message):
                 print(colorama.Fore.LIGHTMAGENTA_EX + 'Taur has deleted the following message:\n {}\nBecause of the word {}\n(from {})'.format(message.content, word, message.author.name))
                 # include the message
                 await message.channel.send('Be carefull {}, your message includes the word "{}". Please avoid that word.'.format(message.author.name, word))
+                # create the embed message to send to the user (private)
+                d = '''
+Taur found the word {} in your message. 
+This word is included in our [list of prohibited words.]() so Taur has deleted your message
+Be careful and avoid these words as you could be banned from the server.
+
+Message:
+```{}```
+                '''.format(word, message.content)
+                bad_word_embed=discord.Embed(title="Taur | Moderation",
+                    description=d,
+                    color=discord.Color.red())
+                bad_word_embed.set_author(name="Taur",
+                    url="https://github.com/PabloCorbCon/Taur")
+                bad_word_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+                await message.author.send(embed=bad_word_embed)
 
 
     if message.content.startswith('t/info'):
@@ -152,9 +170,6 @@ async def on_message(message):
             joke_index = random.randint(1, len(f.readlines()) + 1)
             joke_to_tell = f.readlines()[joke_index]
             await message.channel.send(joke_to_tell)
-
-
-
 
 
 #kick command using discord.py
