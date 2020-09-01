@@ -23,7 +23,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = ''
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.guD-V65eIr9AOVeVKBCXiBtFtfM'
 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
@@ -119,5 +119,16 @@ async def invite(ctx):
     print(violet + '\nTaur has responded to a command (t/commands) in {}'.format(ctx))
     await ctx.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
 
+
+
+
+@bot.command()
+async def ping(ctx):
+
+    """
+    This function pings the user using the bot.latency attribute.
+    This command is called using the "t/ping" string
+    """
+    await ctx.send('Pong: {}'.format(round(bot.latency, 1)))
 
 bot.run(TOKEN)
