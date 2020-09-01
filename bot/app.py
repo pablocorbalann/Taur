@@ -144,7 +144,14 @@ async def on_message(message):
         members_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
 
         # send the message
-        await message.channel.send('Members of the server: ', embed=members_embed)    
+        await message.channel.send('Members of the server: ', embed=members_embed)  
+
+
+    elif message.content.startswith('t/joke'):
+        with open('dic/jokes.txt') as f:
+            joke_index = random.randint(1, len(f.readlines()) + 1)
+            joke_to_tell = f.readlines()[joke_index]
+            await message.channel.send(joke_to_tell)
 
 
 
