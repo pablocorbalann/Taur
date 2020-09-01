@@ -73,6 +73,18 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    with open('dic/bad_words.txt') as f:
+        bad_words = [line.rstrip() for line in f]
+        # moderation of the message
+        for word in message.content.split():
+            # check for mod
+               if word in bad_words and message.author != bot.user:
+                # delete the message 
+                await message.delete()
+                print(colorama.Fore.LIGHTMAGENTA_EX + 'Taur has deleted the following message:\n {}\nBecause of the word {}\n(from {})'.format(message.content, word, message.author.name))
+                # include the message
+                await message.channel.send('Be carefull {}, your message includes the word {}. Please avoid that word.'.format(user.author.name, word))
+
     if message.content.startswith('t/members'):
         members = ''
         for member in message.guild.members:
@@ -84,6 +96,7 @@ async def on_message(message):
         members_embed.set_author(name="Taur",
                 url="https://github.com/PabloCorbCon/Taur")
         members_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+
         # send the embed message to the channel
         message.channel.send('Members of the server:', embed=members_embed)
             
