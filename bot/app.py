@@ -13,8 +13,8 @@ from discord.ext import commands
 import colorama
 import platform
 
-
 import load
+import decorators
 
 colorama.init(autoreset=True)
 
@@ -149,12 +149,7 @@ async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
 
     await user.kick(reason=reason)
     # create an embed message and inform the server
-    kick_embed=discord.Embed(title="Taur | Commands",
-        description='Taur has kicked **{}** from the server.\nReason: {}\n'.format(user, reason)
-        color=0x087d1b)
-    kick_embed.set_author(name="Taur",
-        url="https://github.com/PabloCorbCon/Taur")
-    kick_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-    await ctx.send(f"{user} have been kicked sucessfully")
+    message = await ctx.send('Taur has kicked **{0}**.\n\nReason:\n{1}'.format(user, reason))
+    add_reactions(message, (':thumbsup:'))
 
 bot.run(TOKEN)
