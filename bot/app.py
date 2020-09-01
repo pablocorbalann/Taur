@@ -23,7 +23,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.guD-V65eIr9AOVeVKBCXiBtFtfM'
+TOKEN = ''
 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
@@ -69,7 +69,7 @@ async def info(ctx):
     """
     # create the embed message
     info_embed=discord.Embed(title="Taur | Information",
-        description=open('doc/description.txt').read(),
+        description=open('dic/description.txt').read(),
         color=0x087d1b)
     info_embed.set_author(name="Taur",
         url="https://github.com/PabloCorbCon/Taur")
