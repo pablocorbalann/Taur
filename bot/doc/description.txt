@@ -4,7 +4,7 @@ Every week we add at least three new commands to Taur, which are previously test
 
 All taur's commands start with the prefix `t/`
 
-**You can use the command `t/commands` to see a list of all the commands in the bot.**
+**You can use the command `t/command` to see a list of all the commands in the bot.**
 
 You can check Taur's **GitHub repository** here: https://github.com/PabloCorbCon/Taur
 

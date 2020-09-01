@@ -116,7 +116,7 @@ async def invite(ctx):
     #create the bot link
     bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
 
-    print(violet + '\nTaur has responded to a command (t/commands) in {}'.format(ctx))
+    print(violet + '\nTaur has responded to a command (t/command) in {}'.format(ctx))
     await ctx.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
 
 
@@ -130,6 +130,7 @@ async def ping(ctx):
     This command is called using the "t/ping" string
     """
     await ctx.send('Pong! {}'.format(round(bot.latency, 1)))
+    print(violet + '\nTaur has responded to a command (t/ping) in {}'.format(ctx))
 
 
 
@@ -150,6 +151,7 @@ async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
     await user.kick(reason=reason)
     # create an embed message and inform the server
     message = await ctx.send('Taur has kicked **{0}**.\n\nReason:\n{1}'.format(user, reason))
+    print(violet + '\nTaur has responded to a command (t/kick) in {}'.format(ctx))
     add_reactions(message, (':thumbsup:'))
 
 bot.run(TOKEN)
