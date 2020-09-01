@@ -23,7 +23,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = ''
+TOKEN = 
 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
@@ -69,7 +69,7 @@ async def info(ctx):
     """
     # create the embed message
     info_embed=discord.Embed(title="Taur | Information",
-        description=open('dic/description.txt').read(),
+        description=open('doc/description.txt').read(),
         color=0x087d1b)
     info_embed.set_author(name="Taur",
         url="https://github.com/PabloCorbCon/Taur")
@@ -83,16 +83,16 @@ async def info(ctx):
 
 
 @bot.command()
-async def commands(ctx):
+async def command(ctx):
 
     """
     This function will display information about the bot using the
-    t/commands ccommand, to display an embed message and it uses other functions
+    t/command ccommand, to display an embed message and it uses other functions
     as load_help_commadns() located in commands.py to load all the data.
     """
     # create the embed message
     commands_embed=discord.Embed(title="Taur | Commands",
-        description='**All the commands start with the prefix "t/**".\n' + load.load_help_commands('doc/commands.json', True) + "\n\n",
+        description='**All the commands start with the prefix "t/**".\n' + load.load_help_commands('dic/commands.json', True) + "\n\n",
         color=0x087d1b)
     commands_embed.set_author(name="Taur",
         url="https://github.com/PabloCorbCon/Taur")
