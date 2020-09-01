@@ -104,6 +104,7 @@ Message:
                     url="https://github.com/PabloCorbCon/Taur")
                 bad_word_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
                 await message.author.send(embed=bad_word_embed)
+                print(decorators.responded_to(message.author.name))
 
 
     if message.content.startswith('t/info'):
@@ -166,10 +167,12 @@ Message:
 
 
     elif message.content.startswith('t/joke'):
+        # the bot tells a joke, so we have to open the jokes file
         with open('dic/jokes.txt') as f:
             joke_index = random.randint(1, len(f.readlines()) + 1)
             joke_to_tell = f.readlines()[joke_index]
             await message.channel.send(joke_to_tell)
+        print(decorators.responded_to('t/joke'))
 
 
 #kick command using discord.py
