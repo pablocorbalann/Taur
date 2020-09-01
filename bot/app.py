@@ -86,123 +86,64 @@ async def on_message(message):
                 # include the message
                 await message.channel.send('Be carefull {}, your message includes the word {}. Please avoid that word.'.format(user.author.name, word))
 
-    if message.content.startswith('t/members'):
-        members = ''
-        for member in message.guild.members:
-            members += '{}\n'.format(member)
 
-        members_embed=discord.Embed(title="Taur | members",
-            description=members,
+    if message.content.startswith('t/info'):
+        # send information about the bot
+        info_embed=discord.Embed(title="Taur | Information",
+            description=open('doc/description.txt').read(),
+            color=0x087d1b)
+        info_embed.set_author(name="Taur",
+            url="https://github.com/PabloCorbCon/Taur")
+        info_embed.set_image(url='https://github.com/PabloCorbCon/Taur/blob/master/branding/logo.png?raw=true')
+        info_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+
+        print(decorators.responded_to('t/info'))
+        await message.channel.send(embed=info_embed)
+
+
+    elif message.content.startswith('t/commands'):
+        # create the embed message
+        commands_embed=discord.Embed(title="Taur | Commands",
+            description='**All the commands start with the prefix "t/**".\n' + load.load_help_commands('dic/commands.json', True) + "\n\n",
+            color=0x087d1b)
+        commands_embed.set_author(name="Taur",
+            url="https://github.com/PabloCorbCon/Taur")
+        commands_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+
+        print(decorators.responded_to('t/commands'))
+        await message.channel.send(embed=commands_embed)
+
+
+    elif message.content.startswith('t/invite'):
+        #create the bot link
+        bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
+
+        print(decorators.responded_to('t/invite'))
+        await message.channel.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
+
+
+    elif message.content.startswith('t/ping'):
+        await message.channel.send('Pong! {}'.format(round(bot.latency, 1)))
+        print(decorators.responded_to('t/ping'))
+
+
+    elif message.content.startswith('t/members'):
+
+        # get the list of members
+        list_of_members = ''
+        for member in message.guild.members:
+            list_of_members += ' {0} |'.format(member.name)
+
+        # create the embed message
+        members_embed=discord.Embed(title="Taur | Members",
+            description='{}'.format(list_of_members),
             color=0x087d1b)
         members_embed.set_author(name="Taur",
-                url="https://github.com/PabloCorbCon/Taur")
+            url="https://github.com/PabloCorbCon/Taur")
         members_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
 
-        # send the embed message to the channel
-        message.channel.send('Members of the server:', embed=members_embed)
-            
-
-
-@bot.command()
-async def info(ctx):
-
-    """
-    This function will display information about the bot using the
-    t/info ccommand, to display an embed message.
-    """
-    # create the embed message
-    info_embed=discord.Embed(title="Taur | Information",
-        description=open('doc/description.txt').read(),
-        color=0x087d1b)
-    info_embed.set_author(name="Taur",
-        url="https://github.com/PabloCorbCon/Taur")
-    info_embed.set_image(url='https://github.com/PabloCorbCon/Taur/blob/master/branding/logo.png?raw=true')
-    info_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-
-    print(decorators.responded_to('t/info', ctx))
-    await ctx.send(embed=info_embed)
-
-
-
-
-@bot.command()
-async def command(ctx):
-
-    """
-    This function will display information about the bot using the
-    t/command ccommand, to display an embed message and it uses other functions
-    as load_help_commadns() located in commands.py to load all the data.
-    """
-    # create the embed message
-    commands_embed=discord.Embed(title="Taur | Commands",
-        description='**All the commands start with the prefix "t/**".\n' + load.load_help_commands('dic/commands.json', True) + "\n\n",
-        color=0x087d1b)
-    commands_embed.set_author(name="Taur",
-        url="https://github.com/PabloCorbCon/Taur")
-    commands_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-
-    print(violet + '\nTaur has responded to a command (t/commands) in {}'.format(ctx))
-    await ctx.send(embed=commands_embed)
-
-
-
-
-@bot.command()
-async def invite(ctx):
-
-    """
-    This function will provide a link to invite Taur
-    to your own discord server. This link is not provided using
-    an embed message
-    """
-
-    #create the bot link
-    bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
-
-    print(decorators.responded_to('t/invite', ctx))
-    await ctx.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
-
-
-
-
-@bot.command()
-async def ping(ctx):
-
-    """
-    This function pings the user using the bot.latency attribute.
-    This command is called using the "t/ping" string
-    """
-    await ctx.send('Pong! {}'.format(round(bot.latency, 1)))
-    print(decorators.responded_to('t/ping', ctx))
-
-
-
-
-@bot.command()
-async def members(ctx):
-
-    """
-    This function will get a list with all the users inside the
-    server and then add them to an embed message
-    """
-
-    # get the list of members
-    list_of_members = ''
-    for member in message.guild.members:
-        list_of_members += '{0} |'.format(member)
-
-    # create the embed message
-    members_embed=discord.Embed(title="Taur | Members",
-        description='Members of the server:\n{}'.format(list_of_members),
-        color=0x087d1b)
-    members_embed.set_author(name="Taur",
-        url="https://github.com/PabloCorbCon/Taur")
-    members_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-
-    # send the message
-    await ctx.send(embed=members_embed)
-
-
+        # send the message
+        await message.channel.send('Members of the server: ', embed=members_embed)            
 
 
 #kick command using discord.py
@@ -223,5 +164,6 @@ async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
     message = await ctx.send('Taur has kicked **{0}**.\n\nReason:\n{1}'.format(user, reason))
     print(decorators.responded_to('t/kick', ctx))
     add_reactions(message, (':thumbsup:'))
+
 
 bot.run(TOKEN)
