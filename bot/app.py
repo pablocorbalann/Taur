@@ -129,6 +129,6 @@ async def ping(ctx):
     This function pings the user using the bot.latency attribute.
     This command is called using the "t/ping" string
     """
-    await ctx.send('Pong: {}'.format(round(bot.latency, 1)))
+    await ctx.send('Pong! {}'.format(round(bot.latency, 1)))
 
 bot.run(TOKEN)
