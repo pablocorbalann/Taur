@@ -12,6 +12,7 @@ import discord
 from discord.ext import commands
 import colorama
 import platform
+import csv
 
 import load
 import decorators
