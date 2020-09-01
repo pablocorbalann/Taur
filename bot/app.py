@@ -60,6 +60,35 @@ async def on_ready():
     print(yellow + '\nGitHub repository: {}'.format(github_repo))
 
 
+@bot.event
+async def on_message(message):
+
+    """
+    This discord event will read all the new messages in the discord
+    server, so if the user wants to use a command but the command does not need
+    permisions or parameters; it will be implemented in this event
+    """
+
+    # check if the bot is the author of the message
+    if message.author == bot.user:
+        return
+
+    if message.content.startswith('t/members'):
+        members = ''
+        for member in message.guild.members:
+            members += '{}\n'.format(member)
+
+        members_embed=discord.Embed(title="Taur | members",
+            description=members,
+            color=0x087d1b)
+        members_embed.set_author(name="Taur",
+                url="https://github.com/PabloCorbCon/Taur")
+        members_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+        # send the embed message to the channel
+        message.channel.send('Members of the server:', embed=members_embed)
+            
+
+
 @bot.command()
 async def info(ctx):
 
@@ -76,7 +105,7 @@ async def info(ctx):
     info_embed.set_image(url='https://github.com/PabloCorbCon/Taur/blob/master/branding/logo.png?raw=true')
     info_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
 
-    print(violet + '\nTaur has responded to a command (t/info) in {}'.format(ctx))
+    print(decorators.responded_to('t/info', ctx))
     await ctx.send(embed=info_embed)
 
 
@@ -116,7 +145,7 @@ async def invite(ctx):
     #create the bot link
     bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
 
-    print(violet + '\nTaur has responded to a command (t/command) in {}'.format(ctx))
+    print(decorators.responded_to('t/invite', ctx))
     await ctx.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
 
 
@@ -130,7 +159,7 @@ async def ping(ctx):
     This command is called using the "t/ping" string
     """
     await ctx.send('Pong! {}'.format(round(bot.latency, 1)))
-    print(violet + '\nTaur has responded to a command (t/ping) in {}'.format(ctx))
+    print(decorators.responded_to('t/ping', ctx))
 
 
 
@@ -178,7 +207,7 @@ async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
     await user.kick(reason=reason)
     # create an embed message and inform the server
     message = await ctx.send('Taur has kicked **{0}**.\n\nReason:\n{1}'.format(user, reason))
-    print(violet + '\nTaur has responded to a command (t/kick) in {}'.format(ctx))
+    print(decorators.responded_to('t/kick', ctx))
     add_reactions(message, (':thumbsup:'))
 
 bot.run(TOKEN)
