@@ -131,4 +131,30 @@ async def ping(ctx):
     """
     await ctx.send('Pong! {}'.format(round(bot.latency, 1)))
 
+
+
+
+#kick command using discord.py
+@bot.command()
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
+
+    """
+    This command (t/kick) will kick a member from the discord server
+    usign the .kick() method. It recibes two parameters:
+
+        p:user => the user to kick
+        reason => the reason to kick the user (d:None)
+    """
+
+    await user.kick(reason=reason)
+    # create an embed message and inform the server
+    kick_embed=discord.Embed(title="Taur | Commands",
+        description='Taur has kicked **{}** from the server.\nReason: {}\n'.format(user, reason)
+        color=0x087d1b)
+    kick_embed.set_author(name="Taur",
+        url="https://github.com/PabloCorbCon/Taur")
+    kick_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+    await ctx.send(f"{user} have been kicked sucessfully")
+
 bot.run(TOKEN)
