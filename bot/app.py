@@ -85,7 +85,7 @@ async def on_message(message):
                if word in bad_words and message.author != bot.user:
                 # delete the message 
                 await message.delete()
-                print(colorama.Fore.LIGHTMAGENTA_EX + 'Taur has deleted the following message:\n {}\nBecause of the word {}\n(from {})'.format(message.content, word, message.author.name))
+                print(decorators.deleted(message, word))
                 # include the message
                 await message.channel.send('Be carefull {}, your message includes the word "{}". Please avoid that word.'.format(message.author.name, word))
                 # create the embed message to send to the user (private)
@@ -97,6 +97,7 @@ Be careful and avoid these words as you could be banned from the server.
 Message:
 ```{}```
                 '''.format(word, message.content)
+                # create the embed message using the discord.Embed() class
                 bad_word_embed=discord.Embed(title="Taur | Moderation",
                     description=d,
                     color=discord.Color.red())
@@ -169,7 +170,10 @@ Message:
     elif message.content.startswith('t/joke'):
         # the bot tells a joke, so we have to open the jokes file
         with open('dic/jokes.txt') as f:
-            joke_index = random.randint(1, len(f.readlines()) + 1)
+            len_of_the_file = len(f.readlines())
+            print('The len of the jokes file is: ', len_of_the_file)
+            joke_index = random.randint(1, len_of_the_file + 1)
+            print(f.readlines())
             joke_to_tell = f.readlines()[joke_index]
             await message.channel.send(joke_to_tell)
         print(decorators.responded_to('t/joke'))

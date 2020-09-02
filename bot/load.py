@@ -52,3 +52,64 @@ def load_help_commands(route, string=False):
 	except FileNotFoundError as e:
 
 		print(f'Could not find the file {route} in load.py/load_help_commands() function\n', e)
+
+
+
+def load_jokes(route, single=False, string=False):
+
+	"""
+	This function will load all the bot jokes
+	(route.txt) to then store them in a Python tuple and return them.
+	It recibes 3 parameters, the first one called route is the route
+	of the file to open, the second one (single[False]) is used to load
+	a single joke instead of all the documment.
+	The third one (string[False]) means if the 
+	text should be returned as a string with the following
+	syntax:
+
+		'joke1<br>joke2<br>joke3<br>....jokeN'
+
+	If string is not True (string == False) it will return a
+	tuple with the following syntax.
+
+		(
+			joke1,
+			joke2,
+			joke3,
+			...
+			jokeN
+		)
+
+	So if the p:single is not False (is a number) and p:string=False
+	the programm will return a tuple with a single element.
+	"""
+
+	try:
+
+		jokes = []
+		jokes_to_tell = ()
+
+		with open(route) as f:
+
+			jokes = f.readlines()
+			# we check if the user wants to return a single joke or the user 
+			# wants to load all the jokes file
+			if single != False:
+				# get the single line as a tuple inside the jokes statement
+				jokes_to_tell = (jokes[single])
+
+			else:
+				# the user wants to load all the jokes inside a list
+				jokes_to_tell = tuple(jokes)
+
+			if string:
+				#return the jokes_to_tell tuple as a string
+				st = ''
+				for joke in jokes_to_tell:
+					st += '{}\n'.format(joke)
+				return st
+			return jokes_to_tell
+
+	except FileNotFoundError as e:
+
+		print(f'Could not find the file {route} in load.py/load_jokes() function\n', e)
