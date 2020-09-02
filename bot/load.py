@@ -105,8 +105,12 @@ def load_jokes(route, single=False, string=False):
 			if string:
 				#return the jokes_to_tell tuple as a string
 				st = ''
+				br_line = ''
+				if not single:
+					br_line = '\n'
+
 				for joke in jokes_to_tell:
-					st += '{}\n'.format(joke)
+					st += '{}{}'.format(joke, br_line)
 				return st
 			return jokes_to_tell
 

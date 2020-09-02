@@ -168,15 +168,13 @@ Message:
 
 
     elif message.content.startswith('t/joke'):
-        # the bot tells a joke, so we have to open the jokes file
-        with open('dic/jokes.txt') as f:
-            len_of_the_file = len(f.readlines())
-            print('The len of the jokes file is: ', len_of_the_file)
-            joke_index = random.randint(1, len_of_the_file + 1)
-            print(f.readlines())
-            joke_to_tell = f.readlines()[joke_index]
-            await message.channel.send(joke_to_tell)
+        # the bot tells a joke, so we have to open the jokes file using the load.load_jokes() function
+        joke_index = random.randint(1, 150)
+        # get an specific joke and then tell it
+        joke = load.load_jokes('dic/jokes.txt', joke_index, True)
+        await message.channel.send(joke)
         print(decorators.responded_to('t/joke'))
+
 
 
 #kick command using discord.py
