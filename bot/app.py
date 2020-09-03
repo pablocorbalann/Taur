@@ -25,7 +25,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.Eqyq7XYR66ZYJXoYG7CKPq2Nagg'
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.zkzfrIJVK7hyxVLdOR4CjfHhClM'
 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
@@ -60,6 +60,9 @@ async def on_ready():
 
     github_repo = 'github.com/PabloCorbCon/Taur'
     print(yellow + '\nGitHub repository: {}'.format(github_repo))
+
+    # Setting `Listening ` status
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=' t/info'))
 
 
 
