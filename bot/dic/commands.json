@@ -2,7 +2,7 @@
 	"commands": [
 		{
 			"info":"Displays information about Taur",
-			"command":"Shows the commands of the bot",	
+			"commands":"Shows the commands of the bot",	
 			"invite":"Provides a link to invite Taur to a server",
 			"support":"Provides support about Taur",
 			"ping":"Pings the user using the latency of the bot",

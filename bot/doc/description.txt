@@ -9,3 +9,5 @@ All taur's commands start with the prefix `t/`
 You can check Taur's **GitHub repository** here: https://github.com/PabloCorbCon/Taur
 
 Invite Taur to your server using the command `t/invite`.
+
+Taur has his own discord server. You can you can join using the command `t/support` or by this link: https://discord.gg/rEZYpkX

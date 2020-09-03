@@ -143,6 +143,14 @@ Message:
         await message.channel.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
 
 
+    elif message.content.startswith('t/support'):
+        #create the bot's server link
+        bot_server_link = 'https://discord.gg/rEZYpkX'
+
+        print(decorators.responded_to('t/support'))
+        await message.channel.send('Taur has his own discord server where you can get suppport:\n\n{}'.format(bot_server_link))
+
+
     elif message.content.startswith('t/ping'):
         await message.channel.send('Pong! {}'.format(round(bot.latency, 1)))
         print(decorators.responded_to('t/ping'))
