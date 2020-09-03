@@ -25,7 +25,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.U5enxWUI7QXUp1p_iCiURbe7Hy0'
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.Eqyq7XYR66ZYJXoYG7CKPq2Nagg'
 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
@@ -177,9 +177,8 @@ Message:
 
 
 
-#kick command using discord.py
+#kick command using discord.py library
 @bot.command()
-@commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
 
     """
@@ -187,14 +186,13 @@ async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
     usign the .kick() method. It recibes two parameters:
 
         p:user => the user to kick
-        reason => the reason to kick the user (d:None)
+        p:reason => the reason to kick the user (d:None)
     """
 
     await user.kick(reason=reason)
     # create an embed message and inform the server
     message = await ctx.send('Taur has kicked **{0}**.\n\nReason:\n{1}'.format(user, reason))
-    print(decorators.responded_to('t/kick', ctx))
-    add_reactions(message, (':thumbsup:'))
+    print(decorators.responded_to('t/kick'))
 
 
 bot.run(TOKEN)

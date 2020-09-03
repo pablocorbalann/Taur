@@ -4,6 +4,7 @@
 			"info":"Displays information about Taur",
 			"command":"Shows the commands of the bot",	
 			"invite":"Provides a link to invite Taur to a server",
+			"support":"Provides support about Taur",
 			"ping":"Pings the user using the latency of the bot",
 			"members":"Returns all the members in the server",
 			"joke":"Taur tells one of his bad jokes",
