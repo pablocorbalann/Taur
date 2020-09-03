@@ -29,7 +29,7 @@ def load_help_commands(route, string=False):
 
 		with open(route) as f:
 
-			help_commands = json.loads(f.read())['commands'][0]
+			help_commands = json.loads(f.read())
 			print('\nHELP COMMANDS: ', help_commands)
 
 			if not string:
@@ -39,14 +39,17 @@ def load_help_commands(route, string=False):
 
 		# return the string (p:string == True)
 		st = ''
-		for command_key, command in zip(help_commands.keys(), help_commands.values()):
+		for group_key, group_value in zip(help_commands.keys(), help_commands.values()):
+			st += '\n**{}**'.format(group_key)
 
-			print(command_key, command)
+			for command_key, command in zip(group_value[0].keys(), group_value[0].values()):
 
-			# syntax of the string
-			st = st + '\n{}: {}'.format(command_key, command)
+				print(command_key, command)
 
-		return st
+				# syntax of the string
+				st = st + '\n{}: {}'.format(command_key, command)
+
+			return st
 
 	# the route is not valid
 	except FileNotFoundError as e:
