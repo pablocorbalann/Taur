@@ -25,7 +25,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 
+TOKEN = ''
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -185,24 +185,46 @@ Message:
         await message.channel.send(joke)
         print(decorators.responded_to('t/joke'))
 
+    await bot.process_commands(message)
 
-
-#kick command using discord.py library
+# create the t/kick command
 @bot.command()
-async def kick(ctx, user: discord.Member, *, reason='Not defined reason.'):
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member : discord.Member , *, reason = 'Not defined reason.'):
 
     """
     This command (t/kick) will kick a member from the discord server
     usign the .kick() method. It recibes two parameters:
 
         p:user => the user to kick
-        p:reason => the reason to kick the user (d:None)
+        p:reason => the reason to kick the user (d:'Not defined reason')
     """
+    try:
+        await member.kick(reason=reason)
+        await ctx.send(f"**{member} has been kicked.**\nReason: {reason}")
 
-    await user.kick(reason=reason)
-    # create an embed message and inform the server
-    message = await ctx.send('Taur has kicked **{0}**.\n\nReason:\n{1}'.format(user, reason))
+        d = '''
+    Taur kicked you from a server.
+
+    Reason:
+    {0}
+
+    If you have any problem, please contact the mods of the server.
+    '''.format(reason)
+        # create the embed message using the discord.Embed() class
+        kicked_embed=discord.Embed(title="Taur | Moderation",
+            description=d,
+            color=discord.Color.red())
+        kicked_embed.set_author(name="Taur",
+            url="https://github.com/PabloCorbCon/Taur")
+        kicked_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+        await message.author.send(embed=kicked_embed)
+        print(decorators.sended_to(member))
+
+    except discord.errors.Forbidden as e:
+        await ctx.send(f"**Could not kick {member}**. Maybe you don't have permissions.")
+        print(e)
+
     print(decorators.responded_to('t/kick'))
-
 
 bot.run(TOKEN)
