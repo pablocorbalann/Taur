@@ -22,18 +22,20 @@ are not tested yet.
 <h6 align="center">General</h6>
 
     
-command: Shows the commands of the bot
+command: Shows the commands of the bot.
     
-invite: Provides a link to invite Taur to a server
+invite: Provides a link to invite Taur to a server.
     
-support: Provides support about Taur
+support: Provides support about Taur.
     
-ping: Pings the user using the latency of the bot
+ping: Pings the user using the latency of the bot.
     
 chat: Taur uses a neural net to chat with you.
     
-members: Returns all the members in the server
+members: Returns all the members in the server.
     
-joke: Taur tells one of his bad jokes
+joke: Taur tells one of his bad jokes.
 
 <h6 align="center">Moderation</h6>
+
+kick: Kicks an user from the discord server.
