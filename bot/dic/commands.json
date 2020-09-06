@@ -1,15 +1,15 @@
 {
 	"general": [{
-		"info": "Displays information about Taur",
-		"command": "Shows the commands of the bot",
-		"invite": "Provides a link to invite Taur to a server",
-		"support": "Provides support about Taur",
-		"ping": "Pings the user using the latency of the bot",
+		"info": "Displays information about Taur.",
+		"command": "Shows the commands of the bot.",
+		"invite": "Provides a link to invite Taur to a server.",
+		"support": "Provides support about Taur.",
+		"ping": "Pings the user using the latency of the bot.",
 		"chat": "Taur uses a neural net to chat with you.",
-		"members": "Returns all the members in the server",
-		"joke": "Taur tells one of his bad jokes"
+		"members": "Returns all the members in the server.",
+		"joke": "Taur tells one of his bad jokes."
 	}],
 	"moderation": [{
-		"kick": "Kicks an user from the discord server"
+		"kick": "Kicks an user from the discord server."
 	}]
 }
