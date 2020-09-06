@@ -5,8 +5,8 @@
 import random
 import numpy as np 
 import json
-from model import NeuralNet
-from nltk_utils import bag_of_words, tokenize
+from connections import Net
+from nl import bag_of_words, tokenize
 
 # create a device using torch
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -28,7 +28,7 @@ hidden_size = data["hidden_size"]
 output_size = data["output_size"]
 
 # create a neural net using the NN() class
-model = NeuralNet(input_size, hidden_size, output_size).to(device)
+model = Net(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
 
