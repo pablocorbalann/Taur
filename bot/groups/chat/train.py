@@ -12,6 +12,8 @@ from torch.utils.data import Dataset, DataLoader
 from nl import bag_of_words, tokenize, stem
 from connections import Net
 
+# create the cuda
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # open the intents.json file and load it into a diccionary using the json module
 with open('intents.json', 'r') as f:
     intents = json.load(f)
@@ -43,9 +45,9 @@ tags = sorted(set(tags))
 # create training data
 for (pattern_sentence, tag) in xy:
     # X: bag of words for each pattern_sentence
-    X_train.append(bag_of_words(pattern_sentence, all_words))
+    train_x.append(bag_of_words(pattern_sentence, all_words))
     # Y: PyTorch CrossEntropyLoss needs only class labels, not one-hot
-    y_train.append(tags.index(tag))
+    train_y.append(tags.index(tag))
 # convert train_x/y to numpy arrays
 train_x = np.array(train_x)
 train_y = np.array(train_y)
@@ -55,9 +57,69 @@ num_epochs = 1000
 batch_size = 8
 learning_rate = 0.001
 # net attributes
-input_size = len(X_train[0])
+input_size = len(train_x[0])
 hidden_size = 8
 output_size = len(tags)
-# create the DataSets()
+
+# create the DataSet() class
+class ChatDataset(Dataset):
+
+    def __init__(self):
+        self.n_samples = len(train_x) 
+        self.x_data = train_x
+        self.y_data = train_y
+
+    # support indexing such that dataset[i] can be used to get i-th sample
+    def __getitem__(self, index):
+        return self.x_data[index], self.y_data[index]
+
+    # we can call len(dataset) to return the size
+    def __len__(self):
+        return self.n_samples
+
+# create the DataSet()
 dataset = ChatDataset()
-model Net(input_size, hidden_size, output_size)
+model = Net(input_size, hidden_size, output_size)
+train_loader = DataLoader(dataset=dataset,
+                          batch_size=batch_size,
+                          shuffle=True,
+                          num_workers=0)
+
+# Loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+# Train the model
+for epoch in range(num_epochs):
+    for (words, labels) in train_loader:
+        words = words.to(device)
+        labels = labels.to(dtype=torch.long).to(device)
+        
+        # Forward pass
+        outputs = model(words)
+        # if y would be one-hot, we must apply
+        # labels = torch.max(labels, 1)[1]
+        loss = criterion(outputs, labels)
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+    if (epoch+1) % 100 == 0:
+        print (f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+print(f'final loss: {loss.item():.4f}')
+
+#create the data diccionary
+data = {
+"model_state": model.state_dict(),
+"input_size": input_size,
+"hidden_size": hidden_size,
+"output_size": output_size,
+"all_words": all_words,
+"tags": tags
+}
+
+FILE = "data.pth"
+torch.save(data, FILE)
+
+print(f'training complete. file saved to {FILE}')

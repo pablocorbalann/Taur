@@ -22,11 +22,11 @@ class Net(nn.Module):
 
         To generate three diferent layers (l1, l2, l3) and a ReLU instance
         """
-        super(NeuralNet, self).__init__()
+        super(Net, self).__init__()
         # create the three layers
         self.l1 = nn.Linear(input_size, hidden_size) 
         self.l2 = nn.Linear(hidden_size, hidden_size) 
-        self.l3 = nn.Linear(hidden_size, num_classes)
+        self.l3 = nn.Linear(hidden_size, out_size)
         # create the relu
         self.relu = nn.ReLU()
     
@@ -38,7 +38,7 @@ class Net(nn.Module):
         """
         output = self.l1(x)
         output = self.relu(output)
-        output = self.l2(out)
+        output = self.l2(output)
         output = self.relu(output)
         output = self.l3(output)
         # no activation and no softmax at the end
