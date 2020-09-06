@@ -5,18 +5,21 @@
 import random
 import numpy as np 
 import json
-from connections import Net
-from nl import bag_of_words, tokenize
+import torch
+import os
+import torch.nn as nn
+from groups.chat.model import Net
+from groups.chat.nl import bag_of_words, tokenize
 
 # create a device using torch
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
+print('The directory is: ', os.getcwd())
 # open the intents.json file and store its data inside a diccionary using the json module
-with open('intents.json', 'r') as json_data:
+with open('groups/chat/data/patt.json', 'r') as json_data:
     intents = json.load(json_data)
 
 # create a constant for our file route and load it.
-FILE = "data.pth"
+FILE = "groups/chat/data/data.pth"
 data = torch.load(FILE)
 
 # create smaller list using the "data" diccionary

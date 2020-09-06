@@ -10,12 +10,12 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from nl import bag_of_words, tokenize, stem
-from connections import Net
+from model import Net
 
 # create the cuda
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # open the intents.json file and load it into a diccionary using the json module
-with open('intents.json', 'r') as f:
+with open('groups/chat/data/patt.json', 'r') as f:
     intents = json.load(f)
 
 #create all the lists we need to store our data.
@@ -119,7 +119,7 @@ data = {
 "tags": tags
 }
 
-FILE = "data.pth"
+FILE = "groups/chat/data/data.pth"
 torch.save(data, FILE)
 
 print(f'training complete. file saved to {FILE}')

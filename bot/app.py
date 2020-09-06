@@ -16,7 +16,6 @@ import csv
 import random 
 import load
 import decorators
-
 import groups.chat.chat as chat
 colorama.init(autoreset=True)
 
@@ -25,7 +24,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = ''
+TOKEN = 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -168,7 +167,8 @@ Message:
         # create an infinitive loop
         sentence = ''
         while sentence != 'Ok, see you later!':
-            msg = await client.wait_for('message', check=check)
+            # wait for the next message
+            msg = await bot.wait_for('message', check=check)
             # create the sentence
             sentence = chat.answer(msg)
             await channel.send(sentence)
