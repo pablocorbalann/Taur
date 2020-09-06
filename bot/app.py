@@ -164,7 +164,7 @@ Message:
         print(decorators.responded_to('t/chat'))
         # create a function to check messages
         def check(m):
-            return m.channel == channel and m.author != bot.user and m.content.startswith('t/chat')
+            return m.channel == channel and m.author != bot.user
         # create an infinitive loop
         while True:
             # wait for the next message
