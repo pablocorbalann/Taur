@@ -16,7 +16,7 @@ import csv
 import random 
 import load
 import decorators
-import groups.chat.chat as chat
+import groups.chat.chat as chat_mod # chat module
 colorama.init(autoreset=True)
 
 #colors
@@ -24,7 +24,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 
+TOKEN = ''
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -160,19 +160,27 @@ Message:
     elif message.content.startswith('t/chat'):
         channel = message.channel
         # chat with the user using the ./chat/ group
-        await channel.send('Remember you can exit the chat using t/stop. Now, type somrthing to start.')
+        await channel.send('Remember you can exit the chat using STOP. Now, type something to start.')
+        print(decorators.responded_to('t/chat'))
         # create a function to check messages
         def check(m):
-            return m.channel == channel
+            return m.channel == channel and m.author != bot.user and m.content.startswith('t/chat')
         # create an infinitive loop
-        sentence = ''
-        while sentence != 'Ok, see you later!':
+        while True:
             # wait for the next message
             msg = await bot.wait_for('message', check=check)
             # create the sentence
-            sentence = chat.answer(msg)
-            await channel.send(sentence)
-
+            sentence = chat_mod.answer(msg.content)
+            # check if the user wants to exit
+            if sentence == 'See you later!':
+                break
+            print(sentence)
+            try:
+                await channel.send(sentence)
+            except discord.errors.HTTPException as e:
+                print('Could not respond to the message: {} with the following sentence: {}.\nERROR:{}'.format(msg.content, sentence, e))
+            else:
+                print('Taur responded to the message: {} with the following sentence: {}.'.format(msg.content, sentence))
 
 
     elif message.content.startswith('t/members'):
@@ -203,6 +211,7 @@ Message:
         print(decorators.responded_to('t/joke'))
 
     await bot.process_commands(message)
+
 
 # create the t/kick command
 @bot.command()

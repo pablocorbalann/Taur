@@ -1,19 +1,19 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
-         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"]
+         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up", "Heya"],
+         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hi, my name is Taur."]
         },
         {"tag": "goodbye",
-         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
-         "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"]
+         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "chao"],
+         "responses": ["Sad to see you go :(", "Talk to you later", "ttml using t/chat", "Goodbye!"]
         },
         {"tag": "age",
          "patterns": ["how old", "how old is your creator", "what is your age", "how old are you", "age?"],
-         "responses": ["I am a 20 years old!", "20 years young!", "I was bornback to 2000"]
+         "responses": ["I am a 20 years old!", "20 years young!", "I was born back to 2000"]
         },
         {"tag": "name",
          "patterns": ["what is your name", "what should I call you", "whats your name?"],
-         "responses": ["You can call me Tim.", "I'm Tim!", "I'm Tim aka Tech With Tim."]        
+         "responses": ["You can call me Taur.", "I'm Taur!", "My name is Taur."]        
      }
    ]
 }

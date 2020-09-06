@@ -15,7 +15,7 @@ from model import Net
 # create the cuda
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # open the intents.json file and load it into a diccionary using the json module
-with open('groups/chat/data/patt.json', 'r') as f:
+with open('data/patt.json', 'r') as f:
     intents = json.load(f)
 
 #create all the lists we need to store our data.
@@ -119,7 +119,7 @@ data = {
 "tags": tags
 }
 
-FILE = "groups/chat/data/data.pth"
+FILE = "data/data.pth"
 torch.save(data, FILE)
 
 print(f'training complete. file saved to {FILE}')

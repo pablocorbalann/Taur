@@ -45,10 +45,11 @@ def answer(sentence):
 	algorithm to answer it.
 	"""
 	# check if the user wants to exit the chat
-	if sentence == 't/stop':
+	if sentence == 'STOP':
 		# break the program
+		print('BOG return: 0')
 		return 'See you later!'
-
+	# tokenize the sentence
 	sentence = tokenize(sentence)
 	bog = bag_of_words(sentence, all_words)
 	bog = bog.reshape(1, bog.shape[0])
@@ -65,6 +66,8 @@ def answer(sentence):
     	#as the probability is greater than 75%, we answer the sentence
 		for intent in intents['intents']:
 			if tag == intent["tag"]:
-				return ''.format(random.choice(intent['responses']))
-			else:
-				return "Sorry, I can't understand you..."
+				print('BOG return: 1')
+				return str(random.choice(intent['responses']))
+	else:
+		print('BOG return: 2')
+		return "Sorry, I can't understand you..."

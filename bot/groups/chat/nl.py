@@ -16,7 +16,7 @@ def tokenize(sentence):
 	>>>tokenize('How are you?')
 	['how', 'are', 'you', '?']
 	"""
-	return nltk.word_tokenize(sentence)
+	return nltk.word_tokenize(str(sentence))
 
 def stem(word):
 	"""
