@@ -14,10 +14,10 @@ import colorama
 import platform
 import csv
 import random 
-
 import load
 import decorators
 
+import groups.chat.chat as chat
 colorama.init(autoreset=True)
 
 #colors
@@ -156,6 +156,12 @@ Message:
     elif message.content.startswith('t/ping'):
         await message.channel.send('Pong! {}'.format(round(bot.latency, 1)))
         print(decorators.responded_to('t/ping'))
+
+
+    elif message.content.startswith('t/chat'):
+        # chat with the user using the ./chat/ group
+        await message.channel.send('Remember you can exit the chat using t/stop. Now, type somrthing to start.')
+        # create an infinitive loop
 
 
     elif message.content.startswith('t/members'):
