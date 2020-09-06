@@ -159,9 +159,20 @@ Message:
 
 
     elif message.content.startswith('t/chat'):
+        channel = message.channel
         # chat with the user using the ./chat/ group
-        await message.channel.send('Remember you can exit the chat using t/stop. Now, type somrthing to start.')
+        await channel.send('Remember you can exit the chat using t/stop. Now, type somrthing to start.')
+        # create a function to check messages
+        def check(m):
+            return m.channel == channel
         # create an infinitive loop
+        sentence = ''
+        while sentence != 'Ok, see you later!':
+            msg = await client.wait_for('message', check=check)
+            # create the sentence
+            sentence = chat.answer(msg)
+            await channel.send(sentence)
+
 
 
     elif message.content.startswith('t/members'):

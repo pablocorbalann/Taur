@@ -42,26 +42,26 @@ def answer(sentence):
 	algorithm to answer it.
 	"""
 	# check if the user wants to exit the chat
-    if sentence == 't/stop':
-    	# break the sentence
-        return 'Ok, see you later!'
+	if sentence == 't/stop':
+		# break the program
+		return 'See you later!'
 
 	sentence = tokenize(sentence)
 	bog = bag_of_words(sentence, all_words)
 	bog = bog.reshape(1, bog.shape[0])
 	bog = torch.from_numpy(bog).to(device)
 	# create the output using model()
-    output = model(bog)
-    _, predicted = torch.max(output, dim=1)
-    # clasify the tag
-    tag = tags[predicted.item()]
-    # calculate the probability
-    probs = torch.softmax(output, dim=1)
-    prob = probs[0][predicted.item()]
-    if prob.item() > 0.75:
+	output = model(bog)
+	_, predicted = torch.max(output, dim=1)
+	# clasify the tag
+	tag = tags[predicted.item()]
+	# calculate the probability
+	probs = torch.softmax(output, dim=1)
+	prob = probs[0][predicted.item()]
+	if prob.item() > 0.75:
     	#as the probability is greater than 75%, we answer the sentence
-        for intent in intents['intents']:
-            if tag == intent["tag"]:
-                return f'{random.choice(intent['responses'])}'
-    else:
-        return "Sorry, I can't understand you..."
+		for intent in intents['intents']:
+			if tag == intent["tag"]:
+				return ''.format(random.choice(intent['responses']))
+			else:
+				return "Sorry, I can't understand you..."
