@@ -39,3 +39,5 @@ joke: Taur tells one of his bad jokes.
 <h6 align="center">Moderation</h6>
 
 kick: Kicks an user from the discord server.
+
+ban: Bans an user from the server.

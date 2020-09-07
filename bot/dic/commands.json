@@ -10,6 +10,7 @@
 		"joke": "Taur tells one of his bad jokes."
 	}],
 	"moderation": [{
-		"kick": "Kicks an user from the discord server."
+		"kick": "Kicks an user from the discord server.",
+		"ban": "Bans someone from the discord server.",
 	}]
 }
