@@ -12,5 +12,6 @@
 	"moderation": [{
 		"kick": "Kicks an user from the discord server.",
 		"ban": "Bans someone from the discord server.",
+		"mute": "Mutes a member from the server."
 	}]
 }

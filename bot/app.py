@@ -14,6 +14,7 @@ import colorama
 import platform
 import csv
 import random 
+import asyncio
 import load
 import decorators
 import groups.chat.chat as chat_mod # chat module
@@ -24,7 +25,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.Syi49Mn3s6Sb03U91ERMygNqS24'
+TOKEN = 
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -252,7 +253,38 @@ async def ban(ctx, member: discord.Member, *, reason=None):
         url="https://github.com/PabloCorbCon/Taur")
     ban_public_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
     await ctx.send(embed=ban_public_embed)
+    print(decorators.responded_to('t/ban'))
 
+
+@bot.command(name='mute')
+@commands.has_permissions(ban_members=True)
+async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=None):
+    if not member:
+        return
+    # select the role using the utils.get role
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    # add the role to the member
+    try:
+        await member.add_roles(role)
+
+    except AttributeError as e:
+        await ctx.send(f"I can't mute {member.mention} because the muted role is not configurated in this server.")
+
+    else:
+        await ctx.send(f" {member.mention} has been muted.\n\nReason: {reason}")
+        await member.send(f"You have been muted {mute_time} seconds.\n\nReason: {reason}")
+        await asyncio.sleep(mute_time)
+        print(decorators.responded_to('t/mute'))
+
+        try:
+            await member.remove_roles(role)
+
+        except AttributeError as e:
+            await ctx.send(f"I can't  unmute {member.mention} because the muted role is not configurated in this server.")
+
+        else:
+            await ctx.send(f"{member.mention} has been unmuted. Remember to follow the rules.")
+            await member.send(f"You have been unmuted. Remember to follow the rules..")v
 
 if __name__ == '__main__':
     bot.run(TOKEN)
