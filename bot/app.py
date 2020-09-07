@@ -24,7 +24,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = ''
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.Syi49Mn3s6Sb03U91ERMygNqS24'
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -112,7 +112,7 @@ Message:
     if message.content.startswith('t/info'):
         # send information about the bot
         info_embed=discord.Embed(title="Taur | Information",
-            description=open('doc/description.txt').read(),
+            description=open('doc/description.txt').read() + '\n\nTaur is active in: {0} servers'.format(len(bot.guilds)),
             color=0x087d1b)
         info_embed.set_author(name="Taur",
             url="https://github.com/PabloCorbCon/Taur")
@@ -213,44 +213,46 @@ Message:
     await bot.process_commands(message)
 
 
-# create the t/kick command
-@bot.command()
-@commands.has_permissions(kick_members=True)
-async def kick(ctx, member : discord.Member , *, reason = 'Not defined reason.'):
-
-    """
-    This command (t/kick) will kick a member from the discord server
-    usign the .kick() method. It recibes two parameters:
-
-        p:user => the user to kick
-        p:reason => the reason to kick the user (d:'Not defined reason')
-    """
-    try:
-        await member.kick(reason=reason)
-        await ctx.send(f"**{member} has been kicked.**\nReason: {reason}")
-
-        d = '''
-    Taur kicked you from a server.
+@bot.command(name='ban')
+@commands.has_permissions(ban_members=True)
+async def ban(ctx, member: discord.Member, *, reason=None):
+    # send a private message to the user
+    d = '''
+    Taur banned you from a server.
 
     Reason:
     {0}
 
     If you have any problem, please contact the mods of the server.
     '''.format(reason)
-        # create the embed message using the discord.Embed() class
-        kicked_embed=discord.Embed(title="Taur | Moderation",
-            description=d,
-            color=discord.Color.red())
-        kicked_embed.set_author(name="Taur",
-            url="https://github.com/PabloCorbCon/Taur")
-        kicked_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-        await message.author.send(embed=kicked_embed)
+    # create the embed message using the discord.Embed() class
+    ban_embed=discord.Embed(title="Taur | Moderation",
+        description=d,
+        color=discord.Color.red())
+    ban_embed.set_author(name="Taur",
+        url="https://github.com/PabloCorbCon/Taur")
+    ban_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+    #try to send the message
+    try:
+        await member.send(embed=ban_embed)
+
+    except: # this will error if the user has blocked the bot or has server dms disabled
+        print('Could not send a private message to {}.'.format(member))
+
+    else:
         print(decorators.sended_to(member))
 
-    except discord.errors.Forbidden as e:
-        await ctx.send(f"**Could not kick {member}**. Maybe you don't have permissions.")
-        print(e)
+    # ban the user
+    await member.ban(reason=reason)
+    # inform the chat
+    ban_public_embed=discord.Embed(title="Taur | Moderation",
+        description='{} has been banned by Taur because of the following reason: {}'.format(member, reason),
+        color=discord.Color.red())
+    ban_public_embed.set_author(name="Taur",
+        url="https://github.com/PabloCorbCon/Taur")
+    ban_public_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+    await ctx.send(embed=ban_public_embed)
 
-    print(decorators.responded_to('t/kick'))
 
-bot.run(TOKEN)
+if __name__ == '__main__':
+    bot.run(TOKEN)
