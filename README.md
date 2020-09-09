@@ -43,3 +43,5 @@ kick: Kicks an user from the discord server.
 ban: Bans an user from the server.
 
 mute: Mutes a member from a server.
+
+**We add new commands every week, you can suggest new commands in the [issues](https://github.com/PabloCorbCon/Taur/issues) section**
