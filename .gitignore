@@ -8,6 +8,8 @@ __pycache__/
 
 # VIM text editor files
 *.swp
+*.swo
+
 # Distribution / packaging
 .Python
 build/
