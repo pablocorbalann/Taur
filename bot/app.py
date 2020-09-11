@@ -25,7 +25,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 
+TOKEN = '
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -215,9 +215,33 @@ Message:
     await bot.process_commands(message)
 
 
+@bot.command(name='purge')
+@commands.has_permissions(ban_members=True)
+async def purge(ctx, limit=5):
+    """
+    Taur uses this command to delete messages from the server
+    using the ctx.purge method
+    """
+    try:
+        # delete the messages 
+        await ctx.channel.purge(limit=amount) # also deletes your own message
+        await ctx.send(f"**Taur has deleted {amount} messages**")
+    except discord.ext.commands.errors.ExpectedClosingQuoteError:
+        await ctx.send('Expecting quotes to end the amount argument.')
+    except TypeError as e:
+        await ctx.send('Invalid type conversion to :int') 
+
+
 @bot.command(name='ban')
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member, *, reason=None):
+    """
+        Taur bans a user using a member received by parameters 
+        and a reason. Call this command using this syntax:
+
+            t/ban @member reason
+        """
+
     # send a private message to the user
     d = '''
     Taur banned you from a server.
