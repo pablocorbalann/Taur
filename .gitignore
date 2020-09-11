@@ -9,6 +9,8 @@ __pycache__/
 # VIM text editor files
 *.swp
 *.swo
+*.swn
+*.swm
 
 # Distribution / packaging
 .Python

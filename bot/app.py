@@ -17,7 +17,7 @@ import random
 import asyncio
 import load
 import decorators
-import groups.chat.chat as chat_mod # chat module
+# import groups.chat.chat as chat_mod # chat module
 colorama.init(autoreset=True)
 
 #colors
@@ -63,7 +63,8 @@ async def on_ready():
     # Setting `Listening ` status
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=' t/info'))
 
-
+  
+    
 
 @bot.event
 async def on_message(message):
@@ -157,7 +158,6 @@ Message:
         await message.channel.send('Pong! {}'.format(round(bot.latency, 1)))
         print(decorators.responded_to('t/ping'))
 
-
     elif message.content.startswith('t/chat'):
         channel = message.channel
         # chat with the user using the ./chat/ group
@@ -168,6 +168,7 @@ Message:
             return m.channel == channel and m.author != bot.user
         # create an infinitive loop
         while True:
+            return 0 #provisional
             # wait for the next message
             msg = await bot.wait_for('message', check=check)
             # create the sentence
@@ -179,7 +180,7 @@ Message:
             try:
                 await channel.send(sentence)
             except discord.errors.HTTPException as e:
-                print('Could not respond to the message: {} with the following sentence: {}.\nERROR:{}'.format(msg.content, sentence, e))
+                print('Could not respond to the message: {} with the following sentence: {}.ERROR:{}'.format(msg.content, sentence, e))
             else:
                 print('Taur responded to the message: {} with the following sentence: {}.'.format(msg.content, sentence))
 
@@ -205,7 +206,7 @@ Message:
 
     elif message.content.startswith('t/joke'):
         # the bot tells a joke, so we have to open the jokes file using the load.load_jokes() function
-        joke_index = random.randint(1, 150)
+        joke_index = random.randint(1, 150) # we select a random joke from the jokes file
         # get an specific joke and then tell it
         joke = load.load_jokes('dic/jokes.txt', joke_index, True)
         await message.channel.send(joke)
@@ -237,7 +238,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     try:
         await member.send(embed=ban_embed)
 
-    except: # this will error if the user has blocked the bot or has server dms disabled
+    except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
         print('Could not send a private message to {}.'.format(member))
 
     else:
@@ -273,7 +274,7 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
     else:
         await ctx.send(f" {member.mention} has been muted.\n\nReason: {reason}")
         await member.send(f"You have been muted {mute_time} seconds.\n\nReason: {reason}")
-        await asyncio.sleep(mute_time)
+        await asyncio.sleep(mute_time) # sleep the time the discord member has been muted using thee asyncio module
         print(decorators.responded_to('t/mute'))
 
         try:
@@ -284,7 +285,8 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
 
         else:
             await ctx.send(f"{member.mention} has been unmuted. Remember to follow the rules.")
-            await member.send(f"You have been unmuted. Remember to follow the rules..")v
+            await member.send(f"You have been unmuted. Remember to follow the rules..")
+            print(decorators.sended_to(str(member.mention)))
 
 if __name__ == '__main__':
     bot.run(TOKEN)
