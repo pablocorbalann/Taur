@@ -13,7 +13,7 @@
 		"kick": "Kicks an user from the discord server.",
 		"ban": "Bans someone from the discord server.",
 		"purge":"Deletes a certain amount of messages from the channel.",
-		"mute": "Mutes a member from the server."
-		"staffvote":"Let staff members vote a message in the serever."
+		"mute": "Mutes a member from the server.",
+		"vote":"Lets all members vote inside a message (Yes & No)"
 	}]
 }

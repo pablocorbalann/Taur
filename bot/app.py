@@ -17,6 +17,7 @@ import random
 import asyncio
 import load
 import decorators
+import datetime
 # import groups.chat.chat as chat_mod # chat module
 from groups.moderation.embed import ModerationEmbed
 colorama.init(autoreset=True)
@@ -379,6 +380,28 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
             await msg.send(ctx )
             print(decorators.responded_to('t/mute'))
             print(decorators.sended_to(str(member.mention)))
+
+
+
+@commands.command()
+#@commands.has_permissions(administrator=True)
+async def vote(ctx, *, message: str):
+    """
+    This command uses a message (p:message:str) passed by parameters to then 
+    let all users up-vote or down-vote it. This command can be just called if 
+    the person who calls it is a member of the staff.
+    """
+    # create the emojis variables
+    emoji1 = discord.utils.get(bot.get_all_emojis(), name = "upvote")
+    emoji2 = discord.utils.get(bot.get_all_emojis(), name = "downvote")
+    embed = discord.Embed(title='Staff Vote', description="{}".format(message), color=discord.Color.blue())
+    embed.add_field(name='Vote below', value="Reply with <:upvote:452583845305384981> to vote **Yes**\n \nReact with <:downvote:452583859532333067> to vote **No**")
+    embed.timestamp = datetime.utcnow()
+    # create the message using a msg variable
+    msg = await ctx.send("@everyone", embed=embed)
+    await bot.add_reaction(msg, emoji1)
+    await bot.add_reaction(msg, emoji2)
+    print(decorators.responded_to('t/vote'))
 
 if __name__ == '__main__':
     bot.run(TOKEN)
