@@ -26,7 +26,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = '
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.Sn7pf9EjUh9ntXdsfmSfWe2QdfQ'
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -216,15 +216,50 @@ Message:
     await bot.process_commands(message)
 
 
+@bot.command(name='kick')
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member: discord.Member, *, reason=None):
+    """
+    Using this command Taur kicks a member from the server using
+    the member.kick method. Call this command using this syntax:
+
+        t/kick @member reason
+    """
+    d = '''
+Taur kicked you from a server
+
+Reason: {0}
+
+If you have any problem, please contact the mods of the server.
+    '''.format(reason)
+    #try to send the message
+    try:
+        msg = ModerationEmbed(d)
+        await msg.send(member) # send the message to the member using msg.send()
+
+    except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
+        print('Could not send a private message to {}.'.format(member))
+
+    else:
+        print(decorators.sended_to(member))
+
+    #k ick the member
+    await member.kick()
+    # inform the public chat
+    msg = ModerationEmbed('{} has been kicked by Taur because of the following reason: {}'.format(member, reason))
+    await msg.send(ctx)
+    print(decorators.responded_to('t/kick'))
+
+
 @bot.command(name='ban')
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member, *, reason=None):
     """
-        Taur bans a user using a member received by parameters 
-        and a reason. Call this command using this syntax:
+    Taur bans a user using a member received by parameters 
+    and a reason. Call this command using this syntax:
 
-            t/ban @member reason
-        """
+        t/ban @member reason
+    """
 
     # send a private message to the user
     d = '''
@@ -248,13 +283,8 @@ If you have any problem, please contact the mods of the server.
     # ban the user
     await member.ban(reason=reason)
     # inform the chat
-    ban_public_embed=discord.Embed(title="Taur | Moderation",
-        description='{} has been banned by Taur because of the following reason: {}'.format(member, reason),
-        color=discord.Color.red())
-    ban_public_embed.set_author(name="Taur",
-        url="https://github.com/PabloCorbCon/Taur")
-    ban_public_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-    await ctx.send(embed=ban_public_embed)
+    msg = ModerationEmbed('{} has been banned by Taur because of the following reason: {}'.format(member, reason))
+    await msg.send(ctx)
     print(decorators.responded_to('t/ban'))
 
 
