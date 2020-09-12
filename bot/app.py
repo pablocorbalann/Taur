@@ -18,6 +18,7 @@ import asyncio
 import load
 import decorators
 # import groups.chat.chat as chat_mod # chat module
+from groups.moderation.embed import ModerationEmbed
 colorama.init(autoreset=True)
 
 #colors
@@ -25,7 +26,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 
+TOKEN = ''
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -217,7 +218,7 @@ Message:
 
 @bot.command(name='purge')
 @commands.has_permissions(ban_members=True)
-async def purge(ctx, limit=5):
+async def purge(ctx, amount=5):
     """
     Taur uses this command to delete messages from the server
     using the ctx.purge method
@@ -225,11 +226,15 @@ async def purge(ctx, limit=5):
     try:
         # delete the messages 
         await ctx.channel.purge(limit=amount) # also deletes your own message
-        await ctx.send(f"**Taur has deleted {amount} messages**")
+        await ctx.send(f"**Taur has deleted {amount} message{'s' if amount > 1 else ''}**") # check if the message is 1, to send "message" instead of "messages"
     except discord.ext.commands.errors.ExpectedClosingQuoteError:
         await ctx.send('Expecting quotes to end the amount argument.')
     except TypeError as e:
         await ctx.send('Invalid type conversion to :int') 
+    except:
+        await ctx.send('Sorry, but you do not have permissions to use this command.')
+    finally:
+        print(decorators.responded_to('t/purge'))
 
 
 @bot.command(name='ban')
@@ -250,17 +255,10 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     {0}
 
     If you have any problem, please contact the mods of the server.
-    '''.format(reason)
-    # create the embed message using the discord.Embed() class
-    ban_embed=discord.Embed(title="Taur | Moderation",
-        description=d,
-        color=discord.Color.red())
-    ban_embed.set_author(name="Taur",
-        url="https://github.com/PabloCorbCon/Taur")
-    ban_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
+    '''
     #try to send the message
     try:
-        await member.send(embed=ban_embed)
+        await member.send(embed=ModerationEmbed(d).get_embed())
 
     except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
         print('Could not send a private message to {}.'.format(member))
@@ -305,16 +303,10 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
 
         If you have any problem, please contact the mods of the server.
         '''.format(reason)
-        # create the embed message using the discord.Embed() class
-        mute_private_embed=discord.Embed(title="Taur | Moderation",
-            description=d,
-            color=discord.Color.red())
-        mute_private_embed.set_author(name="Taur",
-            url="https://github.com/PabloCorbCon/Taur")
-        mute_private_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
         #try to send the message
         try:
-            await member.send(embed=mute_private_embed)
+            msg = member.send(embed=ModerationEmbed(d))
+            msg.send()
 
         except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
             print('Could not send a private message to {}.'.format(member))
@@ -322,13 +314,8 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
         else:
             print(decorators.sended_to(member))
         # inform the chat that the user has been muted
-        mute_embed=discord.Embed(title="Taur | Moderation",
-            description='{0} has been muted from this server {1} seconds.\n\nReason:\n{2}'.format(member, mute_time, reason),
-            color=discord.Color.red())
-        mute_embed.set_author(name="Taur",
-            url="https://github.com/PabloCorbCon/Taur")
-        mute_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-        await ctx.send(embed=mute_embed)
+        msg = ModerationEmbed('{0} has been muted from this server {1} second {2}.\n\nReason:\n{3}'.format(member, mute_time, 's' if mute_time > 1 else '', reason))
+        msg.send(ctx)
         # sleep the time the discord member has been muted using thee asyncio module
         await asyncio.sleep(mute_time) 
         print(decorators.responded_to('t/mute'))
@@ -346,32 +333,20 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
 
             If you have any problem, please contact the mods of the server.
             '''
-            # create the embed message using the discord.Embed() class
-            mute_private_embed=discord.Embed(title="Taur | Moderation",
-                description=d,
-                color=discord.Color.red())
-            mute_private_embed.set_author(name="Taur",
-                url="https://github.com/PabloCorbCon/Taur")
-            mute_private_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
             #try to send the message
             try:
-                await member.send(embed=mute_private_embed)
+                msg = ModerationEmbed(d)
+                msg.send(member)
 
             except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
                 print('Could not send a private message to {}.'.format(member))
 
             else:
                 print(decorators.sended_to(member))
-            # inform the chat that the user has been muted
-            mute_embed=discord.Embed(title="Taur | Moderation",
-                description='{0} has been unmuted from this server, please, remember to red the rules...'.format(member, mute_time, reason),
-                color=discord.Color.red())
-            mute_embed.set_author(name="Taur",
-                url="https://github.com/PabloCorbCon/Taur")
-            mute_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-            await ctx.send(embed=mute_embed)
             # sleep the time the discord member has been muted using thee asyncio module
             await asyncio.sleep(mute_time) 
+            msg = ModerationEmbed('{0} has been unmuted from this server, please, remember to red the rules...'.format(member))
+            msg.send(ctx )
             print(decorators.responded_to('t/mute'))
             print(decorators.sended_to(str(member.mention)))
 
