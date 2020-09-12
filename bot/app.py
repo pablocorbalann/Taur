@@ -26,7 +26,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.xXvT_jMCGJFg0jRizRxxNq0I5K0'
+TOKEN = '
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -216,27 +216,6 @@ Message:
     await bot.process_commands(message)
 
 
-@bot.command(name='purge')
-@commands.has_permissions(ban_members=True)
-async def purge(ctx, amount=5):
-    """
-    Taur uses this command to delete messages from the server
-    using the ctx.purge method
-    """
-    try:
-        # delete the messages 
-        await ctx.channel.purge(limit=amount) # also deletes your own message
-        await ctx.send(f"**Taur has deleted {amount} message{'s' if amount > 1 else ''}**") # check if the message is 1, to send "message" instead of "messages"
-    except discord.ext.commands.errors.ExpectedClosingQuoteError:
-        await ctx.send('Expecting quotes to end the amount argument.')
-    except TypeError as e:
-        await ctx.send('Invalid type conversion to :int') 
-    except:
-        await ctx.send('Sorry, but you do not have permissions to use this command.')
-    finally:
-        print(decorators.responded_to('t/purge'))
-
-
 @bot.command(name='ban')
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member, *, reason=None):
@@ -249,13 +228,12 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
     # send a private message to the user
     d = '''
-    Taur banned you from a server.
+Taur banned you from a server.
 
-    Reason:
-    {0}
+Reason: {0}
 
-    If you have any problem, please contact the mods of the server.
-    '''
+If you have any problem, please contact the mods of the server.
+    '''.format(reason)
     #try to send the message
     try:
         msg = ModerationEmbed(d)
@@ -278,6 +256,27 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     ban_public_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
     await ctx.send(embed=ban_public_embed)
     print(decorators.responded_to('t/ban'))
+
+
+@bot.command(name='purge')
+@commands.has_permissions(ban_members=True)
+async def purge(ctx, amount=5):
+    """
+    Taur uses this command to delete messages from the server
+    using the ctx.purge method
+    """
+    try:
+        # delete the messages 
+        await ctx.channel.purge(limit=amount) # also deletes your own message
+        await ctx.send(f"**Taur has deleted {amount} message{'s' if amount > 1 else ''}**") # check if the message is 1, to send "message" instead of "messages"
+    except discord.ext.commands.errors.ExpectedClosingQuoteError:
+        await ctx.send('Expecting quotes to end the amount argument.')
+    except TypeError as e:
+        await ctx.send('Invalid type conversion to :int') 
+    except:
+        await ctx.send('Sorry, but you do not have permissions to use this command.')
+    finally:
+        print(decorators.responded_to('t/purge'))
 
 
 @bot.command(name='mute')
