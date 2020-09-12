@@ -13,7 +13,7 @@ class ModerationEmbed():
 		self.d = d
 		self.title = title
 
-	def get_message(self):
+	def get(self):
 		"""
 		This method returns a discord.Embed() object to then send it.
 		using the discord.Embed() class (in this file Embed())
@@ -28,4 +28,4 @@ class ModerationEmbed():
 		This method sends the embed message to an specific context 
 		instance.
 		""" 
-		await ctx.send(embed=self.get_embed())
+		await ctx.send(embed=self.get())

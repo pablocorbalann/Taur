@@ -26,7 +26,7 @@ yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
 # set the token (const token)
-TOKEN = ''
+TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.xXvT_jMCGJFg0jRizRxxNq0I5K0'
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='t/')
 
@@ -258,7 +258,8 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     '''
     #try to send the message
     try:
-        await member.send(embed=ModerationEmbed(d).get_embed())
+        msg = ModerationEmbed(d)
+        await msg.send(member) # send the message to the member using msg.send()
 
     except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
         print('Could not send a private message to {}.'.format(member))
@@ -283,7 +284,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 @commands.has_permissions(ban_members=True)
 async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=None):
     if not member:
-        return
+        return # return if the command is something like "t/mute"
     # select the role using the utils.get role
     role = discord.utils.get(ctx.guild.roles, name="muted")
     # add the role to the member
@@ -296,17 +297,17 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
     else:
          # send a private message to the user
         d = '''
-        Taur muted you from this server
+        Taur muted {0} you from the server
 
         Reason:
-        {0}
+        {1}
 
         If you have any problem, please contact the mods of the server.
-        '''.format(reason)
+        '''.format(member, reason)
         #try to send the message
         try:
-            msg = member.send(embed=ModerationEmbed(d))
-            msg.send()
+            msg = embed=ModerationEmbed(d)
+            await msg.send(member)
 
         except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
             print('Could not send a private message to {}.'.format(member))
@@ -314,8 +315,8 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
         else:
             print(decorators.sended_to(member))
         # inform the chat that the user has been muted
-        msg = ModerationEmbed('{0} has been muted from this server {1} second {2}.\n\nReason:\n{3}'.format(member, mute_time, 's' if mute_time > 1 else '', reason))
-        msg.send(ctx)
+        msg = ModerationEmbed('{0} has been muted from this server {1} second{2}.\n\nReason:\n{3}'.format(member, mute_time, 's' if mute_time > 1 else '', reason))
+        await msg.send(ctx)
         # sleep the time the discord member has been muted using thee asyncio module
         await asyncio.sleep(mute_time) 
         print(decorators.responded_to('t/mute'))
@@ -336,7 +337,7 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
             #try to send the message
             try:
                 msg = ModerationEmbed(d)
-                msg.send(member)
+                await msg.send(member)
 
             except: # this will error if the user has blocked the bot or has server dms disabled so discord can't send them a message.
                 print('Could not send a private message to {}.'.format(member))
@@ -346,7 +347,7 @@ async def mute(ctx, mute_time: int, member: discord.Member = None, *, reason=Non
             # sleep the time the discord member has been muted using thee asyncio module
             await asyncio.sleep(mute_time) 
             msg = ModerationEmbed('{0} has been unmuted from this server, please, remember to red the rules...'.format(member))
-            msg.send(ctx )
+            await msg.send(ctx )
             print(decorators.responded_to('t/mute'))
             print(decorators.sended_to(str(member.mention)))
 
