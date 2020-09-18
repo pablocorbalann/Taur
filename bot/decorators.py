@@ -1,7 +1,7 @@
 import colorama
 colorama.init(autoreset=True)
 
-def add_reactions(msg, reactions = ()):
+def add_reactions(msg, reactions):
 
 	"""
 	This function will add the reactions to an specific discord message

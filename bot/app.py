@@ -396,9 +396,7 @@ async def vote(ctx, *, message):
     embed.add_field(name='Vote below', value="Reply with <:upvote:452583845305384981> to vote **Yes**\n \nReact with <:downvote:452583859532333067> to vote **No**")
     # create the message using a msg variable
     msg = await ctx.send("@everyone", embed=embed)
-    reactions = ['👍', '👎']
-    for reaction in reactions:
-        await msg.add_reaction(reaction)
+    decorators.add_reactions(msg, ('👍', '👎'))
     print(decorators.responded_to('t/vote'))
 
 if __name__ == '__main__':
