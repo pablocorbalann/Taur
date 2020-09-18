@@ -29,7 +29,7 @@ violet = colorama.Fore.LIGHTMAGENTA_EX
 # set the token (const token)
 TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.qwm6bnlJGiiy9xzGqx5eqswNSIk'
 # create the bot using the discord.Bot() class
-bot = commands.Bot(command_prefix='t/')
+bot = commands.Bot(command_prefix='td/')
 
 @bot.event
 async def on_ready():
