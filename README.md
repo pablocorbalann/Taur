@@ -7,7 +7,7 @@
 Taur is a Discord bot written with the discord.py library that implements a **large number of commands**, although it is
 still in the early stages of development. **Every week we add three new commands** to Taur, which are previously tested.
 
-**You can invite the last version of Taur using [this link](https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&per:)**
+**You can invite the last version of Taur using [this link](https://discord.com/api/oauth2/authorize?client_id=756622582983163905&permissions=8&scope=bot)**
 
 Taur also has his own **discord server**. You can join it today to receive support or try Taur [here](https://discord.gg/rEZYpkX)
 

@@ -142,10 +142,10 @@ Message:
 
     elif message.content.startswith('t/invite'):
         #create the bot link
-        bot_invite_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
+        dev_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
 
         print(decorators.responded_to('t/invite'))
-        await message.channel.send("You can invite Taur using this link:\n\n{}".format(bot_invite_link))
+        await message.channel.send("You can **invite Taur using this link: **{}\nthe You can invite the developer version of Taur using this link:\n\n{}".format(link, dev_ink))
 
 
     elif message.content.startswith('t/support'):
