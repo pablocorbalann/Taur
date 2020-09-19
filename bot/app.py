@@ -26,8 +26,15 @@ colorama.init(autoreset=True)
 yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
 
+def read_token(r)
+    # reads the token of the bot
+    with open(r) as f:
+        TOKEN = f.readlines()[0].strip()
+        return '{}'.format(TOKEN)
+
 # set the token (const token)
-TOKEN = 'NzQ1NTM1NDg2Nzg0ODMxNTA5.XzzMBw.qwm6bnlJGiiy9xzGqx5eqswNSIk'
+TOKEN_ROUTE = 'dic/token.txt'
+TOKEN = read_token()
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='td/')
 

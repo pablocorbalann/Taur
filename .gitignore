@@ -137,4 +137,4 @@ dmypy.json
 .idea
 .idea/
 
-token.txt
+.bot/dic/token.txt
