@@ -25,16 +25,18 @@ colorama.init(autoreset=True)
 #colors
 yellow = colorama.Fore.LIGHTYELLOW_EX
 violet = colorama.Fore.LIGHTMAGENTA_EX
+red = colorama.Fore.RED
 
-def read_token(r)
+def read_token(r):
     # reads the token of the bot
     with open(r) as f:
-        TOKEN = f.readlines()[0].strip()
+        TOKEN = f.readlines()[0]
+        print(red + 'TOKEN: {}'.format(TOKEN))
         return '{}'.format(TOKEN)
 
 # set the token (const token)
 TOKEN_ROUTE = 'dic/token.txt'
-TOKEN = read_token()
+TOKEN = read_token(TOKEN_ROUTE)
 # create the bot using the discord.Bot() class
 bot = commands.Bot(command_prefix='td/')
 
@@ -110,13 +112,8 @@ Message:
 ```{}```
                 '''.format(word, message.content)
                 # create the embed message using the discord.Embed() class
-                bad_word_embed=discord.Embed(title="Taur | Moderation",
-                    description=d,
-                    color=discord.Color.red())
-                bad_word_embed.set_author(name="Taur",
-                    url="https://github.com/PabloCorbCon/Taur")
-                bad_word_embed.set_footer(text="By Pablo Corbalán | Twitter: @pablocorbcon - GitHub: @PabloCorbCon")
-                await message.author.send(embed=bad_word_embed)
+                e = ModerationEmbed(d)
+                await message.author.send(e.get()) # send the embed message
                 print(decorators.responded_to(message.author.name))
 
 
@@ -149,22 +146,20 @@ Message:
 
     elif message.content.startswith('t/invite'):
         #create the bot link
-        dev_link = 'https://discord.com/oauth2/authorize?client_id=745535486784831509&scope=bot&permissions=268690782'
-
+        link = 'https://discord.com/api/oauth2/authorize?client_id=745535486784831509&permissions=8&scope=bot' # link to invite the link
         print(decorators.responded_to('t/invite'))
-        await message.channel.send("You can **invite Taur using this link: **{}\nthe You can invite the developer version of Taur using this link:\n\n{}".format(link, dev_ink))
+        await message.channel.send("You can **invite Taur using this link: **{}".format(link))
 
 
     elif message.content.startswith('t/support'):
         #create the bot's server link
-        bot_server_link = 'https://discord.gg/rEZYpkX'
-
+        link = 'https://discord.gg/rEZYpkX'
         print(decorators.responded_to('t/support'))
-        await message.channel.send('Taur has his own discord server where you can get suppport:\n\n{}'.format(bot_server_link))
+        await message.channel.send('Taur has his own discord server where you can get suppport:\n\n{}'.format(link))
 
 
     elif message.content.startswith('t/ping'):
-        await message.channel.send('Pong! {}'.format(round(bot.latency, 1)))
+        await message.channel.send('Pong! {}'.format(round(bot.latency, 2)))
         print(decorators.responded_to('t/ping'))
 
     elif message.content.startswith('t/chat'):
@@ -195,12 +190,10 @@ Message:
 
 
     elif message.content.startswith('t/members'):
-
         # get the list of members
         list_of_members = ''
         for member in message.guild.members:
             list_of_members += ' {0} |'.format(member.name)
-
         # create the embed message
         members_embed=discord.Embed(title="Taur | Members",
             description='{}'.format(list_of_members),

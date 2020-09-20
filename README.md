@@ -28,7 +28,7 @@ support: Provides support about Taur.
 
 ping: Pings the user using the latency of the bot.
 
-chat: Taur uses a neural net to chat with you.
+chat (NOT READY): Taur uses a neural net to chat with you.
 
 members: Returns all the members in the server.
 
