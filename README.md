@@ -1,4 +1,4 @@
-<h1 align="center">TAUR IS NOW ARCHIVED</h1>
+<h1 align="center">⚠️TAUR IS NOW ARCHIVED⚠️</h1>
 <h3 align="center">We will no longer provide suppor for Taur. You can still use it with your own token</h3>
 <h4 align="center">Please contact me if you have any doubt</h4>
 
